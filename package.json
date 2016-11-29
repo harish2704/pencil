@@ -18,5 +18,14 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "angular-schema-form": "^0.8.13",
+    "angular-schema-form-bootstrap": "^0.2.0",
+    "angular-ui-router": "^0.3.2",
+    "bluebird": "^3.4.6",
+    "ejs": "^2.5.2",
+    "fs-extra": "^1.0.0",
+    "lodash": "^4.16.6"
   }
 }

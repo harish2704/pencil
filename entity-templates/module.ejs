@@ -1,0 +1,74 @@
+
+<% classList.map( function( classItem ){ %>
+const <%- classItem.id %> = require('./<%- classItem.id %>');
+<% }) %>
+
+
+<%
+function getParams( params ){
+    params = new Set( params.map( v=>v.name.split('.')[0] ) );
+    return Array.from( params );
+}
+%>
+
+/**
+ * <% moduleData.description && moduleData.description.split('\n').map(function(line){ %>
+ * <%- line %><%})%>
+ *
+ * @module <%- moduleData.id %>
+ */
+
+<% functionList.map( function( method ){ %>
+
+/**
+ * <% method.description && method.description.split('\n').map(function(line){ %>
+ * <%- line %><%})%>
+ * @memberof module:<%- moduleData.id %>
+ * <% method.params.map( function(param) { %>
+ * @param {<%- param.type %>} <%- param.name  %> - <%- param.description %><% }) %>
+ * @return {<%- method.returnType %>} - <%- method.returnDescriptoin %>
+ */
+function <%- method.id %>( <%- getParams(method.params).join(', ') %> ){
+
+}
+<% }) %>
+
+
+
+<% interfaceList.map( function( data ){ %>
+
+/**
+ * <% data.description.split('\n').map(function(line){ %>
+ * <%- line %><%})%>
+ * @interface <%- data.id %>
+ * @memberof module:<%- moduleData.id %>
+ */
+
+
+<% data.methods.filter(function(v){ return v.name; }).map( function(method) { %>
+/**
+ * <% method.description && method.description.split('\n').map(function(line){ %>
+ * <%- line %><%})%>
+ *
+ * @method <%- method.name %>
+ * @abstract
+ * @memberof module:<%- moduleData.id %>.<%- data.id %>
+ * @instance
+ * <% method.params.map( function(param) { %>
+ * @param {<%- param.type %>} <%- param.name  %> - <%- param.description %><% }) %>
+ * @return {<%- method.returnType %>} - <%- method.returnDescriptoin %>
+ */
+<% }); %>
+
+<% }) %>
+
+<% allItems = classList.concat(functionList); %>
+
+module.exports = {
+<% allItems.map( function(v){ %>
+    <%- v.id %>,
+<% }) -%>
+};
+
+
+

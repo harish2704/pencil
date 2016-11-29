@@ -1,0 +1,59 @@
+<%
+function getParams( params ){
+  params = new Set( params.map( v=>v.name.split('.')[0] ) );
+  return Array.from( params );
+}
+%>
+<% var konstructor = data.konstructor; %>
+
+/**
+ * <% data.description.split('\n').map(function(line){ %>
+ * <%- line %><%})%>
+ * @memberof module:<%- moduleData.id %>
+ * @class
+ *
+ <%if( data.implements ){ -%>
+   * @implements module:<%- moduleData.id%>.<%- data.implements %>
+ <% } -%>
+ <%if( data.extends ){ -%>
+   * @extends module:<%- moduleData.id%>.<%- data.extends %>
+ <% } -%>
+ */
+class <%- data.id %> {
+
+    <%if( konstructor ){ -%>
+    /**
+     * <% konstructor.description && konstructor.description.split('\n').map(function(line){ %>
+     * <%- line %><%})%>
+     * @constructor
+     * <% konstructor.params.map( function(param) { %>
+     * @param {<%- param.type %>} <%- param.name  %> - <%- param.description %><% }) %>
+     * @return {<%- konstructor.returnType %>} - <%- konstructor.returnDescriptoin %>
+     */
+     <% } -%>
+    constructor(){
+
+    }
+
+    <% data.methods.filter(function(v){ return v.name; }).map( function(method) { %>
+    /**
+     * <% method.description && method.description.split('\n').map(function(line){ %>
+     * <%- line %><%})%>
+     * @method
+     * <% method.params.map( function(param) { %>
+     * @param {<%- param.type %>} <%- param.name  %> - <%- param.description %><% }) %>
+     * @return {<%- method.returnType %>} - <%- method.returnDescriptoin %>
+     */
+    <%- method.name %>( <%- getParams(method.params).join(', ') %> ){
+
+    }
+
+
+    <% }); %>
+
+
+}
+
+
+module.exports = <%- data.id %>;
+

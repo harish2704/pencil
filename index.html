@@ -3,13 +3,68 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="bower_components/angular-schema-form-bs-extra/dist/angular-schema-form-bs-extra.css" type="text/css" media="all" />
+
+    <!-- <link  rel="stylesheet/less" type="text/css"  href="css/app.less" media="all" /> -->
+    <!-- <script>less = { env: 'development'};</script> -->
+    <!-- <script src="bower_components/less/dist/less.js" type="text/javascript" charset="utf-8"></script> -->
+    <!-- <script>less.watch();</script> -->
+
+    <script type="text/javascript" charset="utf-8">
+      window.tv4 = require('tv4');
+      window.jQuery = window.$ = require("jquery");
+    </script>
+    <script src="js/jquery.ui.sortable+deps.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-schema-form-bs-extra/dist/angular-schema-form-bs-extra.js"></script>
+    <script type="text/javascript" src="bower_components/angular-schema-form-bs-extra/dist/templates.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="bower_components/objectpath/lib/ObjectPath.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <script type="text/javascript" src="bower_components/angular-schema-form/dist/schema-form.js"></script>
+    <script type="text/javascript" src="bower_components/angular-schema-form/dist/bootstrap-decorator.js"></script>
+    <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+      body > .container-fluid {
+        margin-top: 50px;
+      }
+      li.list-group-item > button.close.pull-right {
+        margin-left: -15px;
+      }
+    </style>
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  <body ng-app="pencil">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/">
+            Pencil
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="col-xs-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Summary</div>
+          <div class="panel-body">
+            <div class="list-group">
+              <a class="list-group-item" ui-sref="entityList({entity: entity})"  ng-repeat="entity in ENTITIES"> {{ entity }} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-9">
+        <ui-view></ui-view>
+      </div>
+    </div>
   </body>
 
   <script>
